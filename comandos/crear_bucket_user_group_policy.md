@@ -86,3 +86,103 @@ Attached Policies: [test-01-policy]
 To Group: test001
 ```
 
+## Validar por comando
+
+- Ver buckets creados
+```bash
+$ mc mb tbl list
+Bucket created successfully `tbl`.
+Bucket created successfully `list`.
+```
+
+- Listar buckets:
+```bash
+$ mc ls tbl
+[2025-04-15 17:54:04 UTC]     0B test-00/
+[2025-05-03 18:38:18 UTC]     0B test-01/AR CON LOCK DE INICIO PARA PODER HABILITAR a RETENCIÓN
+```
+
+- Listar grupos:
+```bash
+$ mc admin group list tbl
+test-readonly
+test-readwrite
+test001
+```
+
+- Listar policies:
+```bash
+
+$ mc admin policy list tbl
+writeonly
+consoleAdmin
+diagnostics
+readonly
+readwrite
+test-01-policy
+test-readonly
+test-readwrite
+```
+
+- Listar usuarios:
+```bash
+$ mc admin user list tbl
+enabled    test1                                     
+enabled    test2                                     
+enabled    test_user        
+```
+
+- Ver detalle de una policy:
+```bash
+
+
+$ mc admin policy info tbl test-01-policy
+{
+ "PolicyName": "test-01-policy",
+ "Policy": {
+  "Version": "2012-10-17",
+  "Statement": [
+   {
+    "Effect": "Allow",
+    "Action": [
+     "s3:ListBucket",
+     "s3:GetBucketLocation"
+    ],
+    "Resource": [
+     "arn:aws:s3:::test-01"
+    ]
+   },
+   {
+    "Effect": "Allow",
+    "Action": [
+     "s3:PutObject",
+     "s3:DeleteObject",
+     "s3:GetObject"
+    ],
+    "Resource": [
+     "arn:aws:s3:::test-01/*"
+    ]
+   }
+  ]
+ },
+ "CreateDate": "2025-05-03T19:07:17.184Z",
+ "UpdateDate": "2025-05-03T19:26:41.606Z"
+}
+```
+- Ver detalle de un grupo:
+```bash
+$ mc admin group info tbl test001
+Group: test001
+Status: enabled
+Policy: test-01-policy
+Members: test_user
+```
+
+- Ver detalle de un usuario
+```bash
+$ mc admin user info tbl test_user
+AccessKey: test_user
+Status: enabled
+PolicyName: 
+MemberOf: [test001]
+```
