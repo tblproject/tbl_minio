@@ -1,5 +1,5 @@
 ## Objetivo
-En este documento se recogen los comandos necesarios para hacer las siguientes oepraciones:
+En este documento se recogen los comandos necesarios para hacer las siguientes operaciones:
 - Configurar un alias para la gestión de la conexión a minio.
 - Crear un bucket con versionado y retención.
 - Crear una policy de control de acceso al bucket.
